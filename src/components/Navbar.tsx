@@ -21,6 +21,9 @@ export default function Navbar() {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+  const closedDropdown = () => {
+    setDropdownOpen(isDropdownOpen);
+  };
 
   return (
     <header className="sticky top-0 flex h-16 items-center gap-1 border-b bg-background px-4 md:px-6">
@@ -40,19 +43,19 @@ export default function Navbar() {
         </form>
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger asChild toggleDropdown={toggleDropdown}>
             <Button variant="secondary" size="icon" className="rounded-full">
               <img width={200} height={200} src={`https://api.dicebear.com/7.x/lorelei/svg?seed=$%7Bprops.name%7D`} alt="avatar" />
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent closeDropdown={closedDropdown}>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => console.log("Settings clicked")}>Settings</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => console.log("Support clicked")}>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => console.log("Logout clicked")}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
